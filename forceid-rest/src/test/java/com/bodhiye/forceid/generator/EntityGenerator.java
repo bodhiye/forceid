@@ -50,7 +50,7 @@ public class EntityGenerator {
         });
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("luojiazhishu123!");
+        dsc.setPassword("root");
         dsc.setUrl("jdbc:mysql://127.0.0.1:3306/rest?characterEncoding=utf8");
         mpg.setDataSource(dsc);
 

@@ -79,7 +79,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/forceid?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: luojiazhishu123!
+    password: root
     db-name: forceid
     filters: log4j,wall,mergeStat
 
@@ -89,12 +89,12 @@ forceid:
     datasource:
       url: jdbc:mysql://127.0.0.1:3306/forceid_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
-      password: luojiazhishu123!
+      password: root
   muti-datasource:
     default-dataSource-name: dataSourceForceid #默认的数据源名称
     url: jdbc:mysql://127.0.0.1:3306/forceid_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
-    password: luojiazhishu123!
+    password: root
 
 logging:
   level.root: info
@@ -112,7 +112,7 @@ spring:
   datasource:
       url: jdbc:mysql://127.0.0.1:3306/forceid?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
-      password: luojiazhishu123!
+      password: root
       filters: log4j,wall,mergeStat
 
 logging:

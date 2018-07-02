@@ -29,7 +29,7 @@ public class ForceidFlowableProperties {
     /**
      * 默认多数据源的数据库密码
      */
-    private String password = "luojiazhishu123!";
+    private String password = "root";
 
     public void config(DruidDataSource dataSource) {
         dataSource.setUrl(url);

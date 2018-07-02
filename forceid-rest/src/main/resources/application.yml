@@ -30,7 +30,7 @@ spring:
   datasource:
       url: jdbc:mysql://127.0.0.1:3306/forceid_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
       username: root
-      password: luojiazhishu123!
+      password: root
       filters: log4j,wall,mergeStat
 
 logging:
