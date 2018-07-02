@@ -1,382 +1,582 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : 本地
-Source Server Version : 50621
-Source Host           : localhost:3306
-Source Database       : forceid
+ Source Server         : MySQL
+ Source Server Type    : MySQL
+ Source Server Version : 50719
+ Source Host           : localhost:3306
+ Source Schema         : forceid
 
-Target Server Type    : MYSQL
-Target Server Version : 50621
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 50719
+ File Encoding         : 65001
 
-Date: 2017-12-10 11:34:35
+ Date: 02/07/2018 11:53:06
 */
 
-DROP DATABASE IF EXISTS forceid_flowable;
-CREATE DATABASE IF NOT EXISTS forceid_flowable DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
-DROP DATABASE IF EXISTS forceid;
-CREATE DATABASE IF NOT EXISTS forceid DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
-
-USE forceid;
-
-SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for sys_application
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_application`;
+CREATE TABLE `sys_application`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '应用名',
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '应用详情',
+  `version` int(11) DEFAULT NULL COMMENT '保留字段',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '应用表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sys_dept
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dept`;
-CREATE TABLE `sys_dept` (
+CREATE TABLE `sys_dept`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `num` int(11) DEFAULT NULL COMMENT '排序',
   `pid` int(11) DEFAULT NULL COMMENT '父部门id',
-  `pids` varchar(255) DEFAULT NULL COMMENT '父级ids',
-  `simplename` varchar(45) DEFAULT NULL COMMENT '简称',
-  `fullname` varchar(255) DEFAULT NULL COMMENT '全称',
-  `tips` varchar(255) DEFAULT NULL COMMENT '提示',
+  `pids` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父级ids',
+  `simplename` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '简称',
+  `fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '全称',
+  `tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '提示',
   `version` int(11) DEFAULT NULL COMMENT '版本（乐观锁保留字段）',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='部门表';
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES ('24', '1', '0', '[0],', '总公司', '总公司', '', null);
-INSERT INTO `sys_dept` VALUES ('25', '2', '24', '[0],[24],', '开发部', '开发部', '', null);
-INSERT INTO `sys_dept` VALUES ('26', '3', '24', '[0],[24],', '运营部', '运营部', '', null);
-INSERT INTO `sys_dept` VALUES ('27', '4', '24', '[0],[24],', '战略部', '战略部', '', null);
+INSERT INTO `sys_dept` VALUES (24, 1, 0, '[0],', '珞珈之戍', '珞珈之戍部门', '武汉大学国家网络安全学院珞珈之戍研发小组', NULL);
+INSERT INTO `sys_dept` VALUES (25, 2, 24, '[0],[24],', '身份管理', '身份管理部门', '负责ForceID身份管理系统的研发', NULL);
+INSERT INTO `sys_dept` VALUES (26, 3, 24, '[0],[24],', '大数据平台', '大数据部门', '负责ForceID大数据平台的研发', NULL);
+INSERT INTO `sys_dept` VALUES (27, 4, 24, '[0],[24],', '认证平台', '身份认证部门', '负责ForceID身份认证平台的研发', NULL);
+INSERT INTO `sys_dept` VALUES (28, 1, 24, '[0],[24],', '战略部', '战略部门', '负责ForceID产品的宣传和推广', NULL);
+INSERT INTO `sys_dept` VALUES (29, 7, 24, '[0],[24],', '测试部', '测试部门', '负责ForceID全线产品的测试', NULL);
+INSERT INTO `sys_dept` VALUES (30, 9, 24, '[0],[24],', '体验服', '体验部门', '负责体验ForceID的产品并给出评价', NULL);
+INSERT INTO `sys_dept` VALUES (31, 6, 24, '[0],[24],', '证书部', '证书部门', '负责ForceID中的证书认证方式的实现', NULL);
+INSERT INTO `sys_dept` VALUES (32, 8, 24, '[0],[24],', '公众号', '公众号部门', '负责ForceID公众号的维护', NULL);
+INSERT INTO `sys_dept` VALUES (33, 5, 24, '[0],[24],', '区块链', '区块链部门', '负责ForceID区块链平台的开发', NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict`;
-CREATE TABLE `sys_dict` (
+CREATE TABLE `sys_dict`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `num` int(11) DEFAULT NULL COMMENT '排序',
   `pid` int(11) DEFAULT NULL COMMENT '父级字典',
-  `name` varchar(255) DEFAULT NULL COMMENT '名称',
-  `tips` varchar(255) DEFAULT NULL COMMENT '提示',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='字典表';
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '名称',
+  `tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '提示',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '字典表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
-INSERT INTO `sys_dict` VALUES ('16', '0', '0', '状态', null);
-INSERT INTO `sys_dict` VALUES ('17', '1', '16', '启用', null);
-INSERT INTO `sys_dict` VALUES ('18', '2', '16', '禁用', null);
-INSERT INTO `sys_dict` VALUES ('29', '0', '0', '性别', null);
-INSERT INTO `sys_dict` VALUES ('30', '1', '29', '男', null);
-INSERT INTO `sys_dict` VALUES ('31', '2', '29', '女', null);
-INSERT INTO `sys_dict` VALUES ('35', '0', '0', '账号状态', null);
-INSERT INTO `sys_dict` VALUES ('36', '1', '35', '启用', null);
-INSERT INTO `sys_dict` VALUES ('37', '2', '35', '冻结', null);
-INSERT INTO `sys_dict` VALUES ('38', '3', '35', '已删除', null);
+INSERT INTO `sys_dict` VALUES (16, 0, 0, '状态', NULL);
+INSERT INTO `sys_dict` VALUES (17, 1, 16, '启用', NULL);
+INSERT INTO `sys_dict` VALUES (18, 2, 16, '禁用', NULL);
+INSERT INTO `sys_dict` VALUES (29, 0, 0, '性别', NULL);
+INSERT INTO `sys_dict` VALUES (30, 1, 29, '男', NULL);
+INSERT INTO `sys_dict` VALUES (31, 2, 29, '女', NULL);
+INSERT INTO `sys_dict` VALUES (35, 0, 0, '账号状态', NULL);
+INSERT INTO `sys_dict` VALUES (36, 1, 35, '启用', NULL);
+INSERT INTO `sys_dict` VALUES (37, 2, 35, '冻结', NULL);
+INSERT INTO `sys_dict` VALUES (38, 3, 35, '已删除', NULL);
 
 -- ----------------------------
 -- Table structure for sys_expense
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_expense`;
-CREATE TABLE `sys_expense` (
+CREATE TABLE `sys_expense`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `money` decimal(20,2) DEFAULT NULL COMMENT '报销金额',
-  `desc` varchar(255) DEFAULT '' COMMENT '描述',
-  `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `money` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '报销金额',
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '描述',
+  `createtime` datetime(0) DEFAULT CURRENT_TIMESTAMP,
   `state` int(11) DEFAULT NULL COMMENT '状态: 1.待提交  2:待审核   3.审核通过 4:驳回',
   `userid` int(11) DEFAULT NULL COMMENT '用户id',
-  `processId` varchar(255) DEFAULT NULL COMMENT '流程定义id',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='报销表';
+  `processId` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '流程定义id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '报销表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_expense
 -- ----------------------------
+INSERT INTO `sys_expense` VALUES (23, '123.00', '123', '2018-07-01 16:38:37', 2, 1, '22501');
+INSERT INTO `sys_expense` VALUES (24, '456.00', '456', '2018-07-01 16:39:19', 1, 1, '22514');
+INSERT INTO `sys_expense` VALUES (25, '789.00', '789', '2018-07-01 16:49:10', 1, 1, '25001');
+INSERT INTO `sys_expense` VALUES (26, '你好啊', '啊啊啊', '2018-07-01 16:52:45', 2, 1, '27519');
+INSERT INTO `sys_expense` VALUES (27, '呵呵', '呵呵哒', '2018-07-01 16:53:40', 1, 1, '27540');
+INSERT INTO `sys_expense` VALUES (28, '测试', '我就测试一下子', '2018-07-01 16:54:01', 1, 1, '27553');
+INSERT INTO `sys_expense` VALUES (29, '测试服', '大大大', '2018-07-01 16:54:24', 2, 1, '27566');
 
 -- ----------------------------
 -- Table structure for sys_login_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_login_log`;
-CREATE TABLE `sys_login_log` (
+CREATE TABLE `sys_login_log`  (
   `id` int(65) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `logname` varchar(255) DEFAULT NULL COMMENT '日志名称',
+  `logname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '日志名称',
   `userid` int(65) DEFAULT NULL COMMENT '管理员id',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  `succeed` varchar(255) DEFAULT NULL COMMENT '是否执行成功',
-  `message` text COMMENT '具体消息',
-  `ip` varchar(255) DEFAULT NULL COMMENT '登录ip',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8 COMMENT='登录记录';
+  `createtime` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `succeed` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否执行成功',
+  `message` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '具体消息',
+  `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '登录ip',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 227 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '登录记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_login_log
 -- ----------------------------
+INSERT INTO `sys_login_log` VALUES (217, '退出日志', 1, '2018-07-01 15:55:53', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (218, '登录日志', 1, '2018-07-01 15:55:56', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (219, '退出日志', 1, '2018-07-01 15:56:01', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (220, '登录日志', 48, '2018-07-01 15:56:10', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (221, '退出日志', 48, '2018-07-01 15:57:18', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (222, '登录日志', 1, '2018-07-01 15:57:22', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (223, '登录日志', 1, '2018-07-01 16:23:45', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (224, '登录日志', 1, '2018-07-01 16:48:05', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (225, '登录日志', 1, '2018-07-01 16:50:02', '成功', NULL, '192.168.1.101');
+INSERT INTO `sys_login_log` VALUES (226, '登录日志', 1, '2018-07-01 20:18:43', '成功', NULL, '192.168.1.101');
 
 -- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
-CREATE TABLE `sys_menu` (
+CREATE TABLE `sys_menu`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `code` varchar(255) DEFAULT NULL COMMENT '菜单编号',
-  `pcode` varchar(255) DEFAULT NULL COMMENT '菜单父编号',
-  `pcodes` varchar(255) DEFAULT NULL COMMENT '当前菜单的所有父菜单编号',
-  `name` varchar(255) DEFAULT NULL COMMENT '菜单名称',
-  `icon` varchar(255) DEFAULT NULL COMMENT '菜单图标',
-  `url` varchar(255) DEFAULT NULL COMMENT 'url地址',
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单编号',
+  `pcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单父编号',
+  `pcodes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '当前菜单的所有父菜单编号',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单名称',
+  `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '菜单图标',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'url地址',
   `num` int(65) DEFAULT NULL COMMENT '菜单排序号',
   `levels` int(65) DEFAULT NULL COMMENT '菜单层级',
   `ismenu` int(11) DEFAULT NULL COMMENT '是否是菜单（1：是  0：不是）',
-  `tips` varchar(255) DEFAULT NULL COMMENT '备注',
+  `tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `status` int(65) DEFAULT NULL COMMENT '菜单状态 :  1:启用   0:不启用',
   `isopen` int(11) DEFAULT NULL COMMENT '是否打开:    1:打开   0:不打开',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8 COMMENT='菜单表';
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 173 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('105', 'system', '0', '[0],', '系统管理', 'fa-user', '#', '4', '1', '1', null, '1', '1');
-INSERT INTO `sys_menu` VALUES ('106', 'mgr', 'system', '[0],[system],', '用户管理', '', '/mgr', '1', '2', '1', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('107', 'mgr_add', 'mgr', '[0],[system],[mgr],', '添加用户', null, '/mgr/add', '1', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('108', 'mgr_edit', 'mgr', '[0],[system],[mgr],', '修改用户', null, '/mgr/edit', '2', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('109', 'mgr_delete', 'mgr', '[0],[system],[mgr],', '删除用户', null, '/mgr/delete', '3', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('110', 'mgr_reset', 'mgr', '[0],[system],[mgr],', '重置密码', null, '/mgr/reset', '4', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('111', 'mgr_freeze', 'mgr', '[0],[system],[mgr],', '冻结用户', null, '/mgr/freeze', '5', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('112', 'mgr_unfreeze', 'mgr', '[0],[system],[mgr],', '解除冻结用户', null, '/mgr/unfreeze', '6', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('113', 'mgr_setRole', 'mgr', '[0],[system],[mgr],', '分配角色', null, '/mgr/setRole', '7', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('114', 'role', 'system', '[0],[system],', '角色管理', null, '/role', '2', '2', '1', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('115', 'role_add', 'role', '[0],[system],[role],', '添加角色', null, '/role/add', '1', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('116', 'role_edit', 'role', '[0],[system],[role],', '修改角色', null, '/role/edit', '2', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('117', 'role_remove', 'role', '[0],[system],[role],', '删除角色', null, '/role/remove', '3', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('118', 'role_setAuthority', 'role', '[0],[system],[role],', '配置权限', null, '/role/setAuthority', '4', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('119', 'menu', 'system', '[0],[system],', '菜单管理', null, '/menu', '4', '2', '1', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('120', 'menu_add', 'menu', '[0],[system],[menu],', '添加菜单', null, '/menu/add', '1', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('121', 'menu_edit', 'menu', '[0],[system],[menu],', '修改菜单', null, '/menu/edit', '2', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('122', 'menu_remove', 'menu', '[0],[system],[menu],', '删除菜单', null, '/menu/remove', '3', '3', '0', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('128', 'log', 'system', '[0],[system],', '业务日志', null, '/log', '6', '2', '1', null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('130', 'druid', 'system', '[0],[system],', '监控管理', null, '/druid', '7', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('131', 'dept', 'system', '[0],[system],', '部门管理', null, '/dept', '3', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('132', 'dict', 'system', '[0],[system],', '字典管理', null, '/dict', '4', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('133', 'loginLog', 'system', '[0],[system],', '登录日志', null, '/loginLog', '6', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('134', 'log_clean', 'log', '[0],[system],[log],', '清空日志', null, '/log/delLog', '3', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('135', 'dept_add', 'dept', '[0],[system],[dept],', '添加部门', null, '/dept/add', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('136', 'dept_update', 'dept', '[0],[system],[dept],', '修改部门', null, '/dept/update', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('137', 'dept_delete', 'dept', '[0],[system],[dept],', '删除部门', null, '/dept/delete', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('138', 'dict_add', 'dict', '[0],[system],[dict],', '添加字典', null, '/dict/add', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('139', 'dict_update', 'dict', '[0],[system],[dict],', '修改字典', null, '/dict/update', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('140', 'dict_delete', 'dict', '[0],[system],[dict],', '删除字典', null, '/dict/delete', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('141', 'notice', 'system', '[0],[system],', '通知管理', null, '/notice', '9', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('142', 'notice_add', 'notice', '[0],[system],[notice],', '添加通知', null, '/notice/add', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('143', 'notice_update', 'notice', '[0],[system],[notice],', '修改通知', null, '/notice/update', '2', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('144', 'notice_delete', 'notice', '[0],[system],[notice],', '删除通知', null, '/notice/delete', '3', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('145', 'hello', '0', '[0],', '通知', 'fa-rocket', '/notice/hello', '1', '1', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('148', 'code', '0', '[0],', '代码生成', 'fa-code', '/code', '3', '1', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('149', 'api_mgr', '0', '[0],', '接口文档', 'fa-leaf', '/swagger-ui.html', '2', '1', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('150', 'to_menu_edit', 'menu', '[0],[system],[menu],', '菜单编辑跳转', '', '/menu/menu_edit', '4', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('151', 'menu_list', 'menu', '[0],[system],[menu],', '菜单列表', '', '/menu/list', '5', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('152', 'to_dept_update', 'dept', '[0],[system],[dept],', '修改部门跳转', '', '/dept/dept_update', '4', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('153', 'dept_list', 'dept', '[0],[system],[dept],', '部门列表', '', '/dept/list', '5', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('154', 'dept_detail', 'dept', '[0],[system],[dept],', '部门详情', '', '/dept/detail', '6', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('155', 'to_dict_edit', 'dict', '[0],[system],[dict],', '修改菜单跳转', '', '/dict/dict_edit', '4', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('156', 'dict_list', 'dict', '[0],[system],[dict],', '字典列表', '', '/dict/list', '5', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('157', 'dict_detail', 'dict', '[0],[system],[dict],', '字典详情', '', '/dict/detail', '6', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('158', 'log_list', 'log', '[0],[system],[log],', '日志列表', '', '/log/list', '2', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('159', 'log_detail', 'log', '[0],[system],[log],', '日志详情', '', '/log/detail', '3', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('160', 'del_login_log', 'loginLog', '[0],[system],[loginLog],', '清空登录日志', '', '/loginLog/delLoginLog', '1', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('161', 'login_log_list', 'loginLog', '[0],[system],[loginLog],', '登录日志列表', '', '/loginLog/list', '2', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('162', 'to_role_edit', 'role', '[0],[system],[role],', '修改角色跳转', '', '/role/role_edit', '5', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('163', 'to_role_assign', 'role', '[0],[system],[role],', '角色分配跳转', '', '/role/role_assign', '6', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('164', 'role_list', 'role', '[0],[system],[role],', '角色列表', '', '/role/list', '7', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('165', 'to_assign_role', 'mgr', '[0],[system],[mgr],', '分配角色跳转', '', '/mgr/role_assign', '8', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('166', 'to_user_edit', 'mgr', '[0],[system],[mgr],', '编辑用户跳转', '', '/mgr/user_edit', '9', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('167', 'mgr_list', 'mgr', '[0],[system],[mgr],', '用户列表', '', '/mgr/list', '10', '3', '0', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('168', 'expense', '0', '[0],', '报销管理', 'fa-clone', '#', '5', '1', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('169', 'expense_fill', 'expense', '[0],[expense],', '报销申请', '', '/expense', '1', '2', '1', null, '1', null);
-INSERT INTO `sys_menu` VALUES ('170', 'expense_progress', 'expense', '[0],[expense],', '报销审批', '', '/process', '2', '2', '1', null, '1', null);
+INSERT INTO `sys_menu` VALUES (105, 'system', '0', '[0],', '系统管理', 'fa-gear', '#', 8, 1, 1, NULL, 1, 1);
+INSERT INTO `sys_menu` VALUES (106, 'mgr', '0', '[0],', '用户管理', 'fa-user', '/mgr', 1, 1, 1, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (107, 'mgr_add', 'mgr', '[0],[system],[mgr],', '添加用户', NULL, '/mgr/add', 1, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (108, 'mgr_edit', 'mgr', '[0],[system],[mgr],', '修改用户', NULL, '/mgr/edit', 2, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (109, 'mgr_delete', 'mgr', '[0],[system],[mgr],', '删除用户', NULL, '/mgr/delete', 3, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (110, 'mgr_reset', 'mgr', '[0],[system],[mgr],', '重置密码', NULL, '/mgr/reset', 4, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (111, 'mgr_freeze', 'mgr', '[0],[system],[mgr],', '冻结用户', NULL, '/mgr/freeze', 5, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (112, 'mgr_unfreeze', 'mgr', '[0],[system],[mgr],', '解除冻结用户', NULL, '/mgr/unfreeze', 6, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (113, 'mgr_setRole', 'mgr', '[0],[system],[mgr],', '分配角色', NULL, '/mgr/setRole', 7, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (114, 'role', '0', '[0],', '角色管理', 'fa-id-card', '/role', 2, 1, 1, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (115, 'role_add', 'role', '[0],[system],[role],', '添加角色', NULL, '/role/add', 1, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (116, 'role_edit', 'role', '[0],[system],[role],', '修改角色', NULL, '/role/edit', 2, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (117, 'role_remove', 'role', '[0],[system],[role],', '删除角色', NULL, '/role/remove', 3, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (118, 'role_setAuthority', 'role', '[0],[system],[role],', '配置权限', NULL, '/role/setAuthority', 4, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (119, 'menu', 'system', '[0],[system],', '菜单管理', 'fa-book', '/menu', 3, 2, 1, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (120, 'menu_add', 'menu', '[0],[system],[menu],', '添加菜单', NULL, '/menu/add', 1, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (121, 'menu_edit', 'menu', '[0],[system],[menu],', '修改菜单', NULL, '/menu/edit', 2, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (122, 'menu_remove', 'menu', '[0],[system],[menu],', '删除菜单', NULL, '/menu/remove', 3, 3, 0, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (128, 'log', 'audit', '[0],[audit],', '业务日志', '', '/log', 6, 2, 1, NULL, 1, 0);
+INSERT INTO `sys_menu` VALUES (130, 'druid', '0', '[0],', '监控管理', 'fa-shield', '/druid', 7, 1, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (131, 'dept', '0', '[0],', '部门管理', 'fa-building', '/dept', 3, 1, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (132, 'dict', 'system', '[0],[system],', '字典管理', '', '/dict', 2, 2, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (133, 'loginLog', 'audit', '[0],[audit],', '登录日志', '', '/loginLog', 6, 2, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (134, 'log_clean', 'log', '[0],[system],[log],', '清空日志', NULL, '/log/delLog', 3, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (135, 'dept_add', 'dept', '[0],[system],[dept],', '添加部门', NULL, '/dept/add', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (136, 'dept_update', 'dept', '[0],[system],[dept],', '修改部门', NULL, '/dept/update', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (137, 'dept_delete', 'dept', '[0],[system],[dept],', '删除部门', NULL, '/dept/delete', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (138, 'dict_add', 'dict', '[0],[system],[dict],', '添加字典', NULL, '/dict/add', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (139, 'dict_update', 'dict', '[0],[system],[dict],', '修改字典', NULL, '/dict/update', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (140, 'dict_delete', 'dict', '[0],[system],[dict],', '删除字典', NULL, '/dict/delete', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (141, 'notice', 'system', '[0],[system],', '通知管理', '', '/notice', 1, 2, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (142, 'notice_add', 'notice', '[0],[system],[notice],', '添加通知', NULL, '/notice/add', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (143, 'notice_update', 'notice', '[0],[system],[notice],', '修改通知', NULL, '/notice/update', 2, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (144, 'notice_delete', 'notice', '[0],[system],[notice],', '删除通知', NULL, '/notice/delete', 3, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (148, 'code', 'system', '[0],[system],', '代码生成', 'fa-code', '/code', 4, 2, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (150, 'to_menu_edit', 'menu', '[0],[system],[menu],', '菜单编辑跳转', '', '/menu/menu_edit', 4, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (151, 'menu_list', 'menu', '[0],[system],[menu],', '菜单列表', '', '/menu/list', 5, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (152, 'to_dept_update', 'dept', '[0],[system],[dept],', '修改部门跳转', '', '/dept/dept_update', 4, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (153, 'dept_list', 'dept', '[0],[system],[dept],', '部门列表', '', '/dept/list', 5, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (154, 'dept_detail', 'dept', '[0],[system],[dept],', '部门详情', '', '/dept/detail', 6, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (155, 'to_dict_edit', 'dict', '[0],[system],[dict],', '修改菜单跳转', '', '/dict/dict_edit', 4, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (156, 'dict_list', 'dict', '[0],[system],[dict],', '字典列表', '', '/dict/list', 5, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (157, 'dict_detail', 'dict', '[0],[system],[dict],', '字典详情', '', '/dict/detail', 6, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (158, 'log_list', 'log', '[0],[system],[log],', '日志列表', '', '/log/list', 2, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (159, 'log_detail', 'log', '[0],[system],[log],', '日志详情', '', '/log/detail', 3, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (160, 'del_login_log', 'loginLog', '[0],[system],[loginLog],', '清空登录日志', '', '/loginLog/delLoginLog', 1, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (161, 'login_log_list', 'loginLog', '[0],[system],[loginLog],', '登录日志列表', '', '/loginLog/list', 2, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (162, 'to_role_edit', 'role', '[0],[system],[role],', '修改角色跳转', '', '/role/role_edit', 5, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (163, 'to_role_assign', 'role', '[0],[system],[role],', '角色分配跳转', '', '/role/role_assign', 6, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (164, 'role_list', 'role', '[0],[system],[role],', '角色列表', '', '/role/list', 7, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (165, 'to_assign_role', 'mgr', '[0],[system],[mgr],', '分配角色跳转', '', '/mgr/role_assign', 8, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (166, 'to_user_edit', 'mgr', '[0],[system],[mgr],', '编辑用户跳转', '', '/mgr/user_edit', 9, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (167, 'mgr_list', 'mgr', '[0],[system],[mgr],', '用户列表', '', '/mgr/list', 10, 3, 0, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (168, 'expense', '0', '[0],', '请求管理', 'fa-commenting', '#', 5, 1, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (169, 'expense_fill', 'expense', '[0],[expense],', '请求申请', '', '/expense', 1, 2, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (170, 'expense_progress', 'expense', '[0],[expense],', '请求审批', '', '/process', 2, 2, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (171, 'audit', '0', '[0],', '审计管理', 'fa-check-square', '#', 6, 1, 1, NULL, 1, NULL);
+INSERT INTO `sys_menu` VALUES (172, 'application', '0', '[0],', '应用管理', 'fa-briefcase', '/application', 4, 1, 1, NULL, 1, NULL);
 
 -- ----------------------------
 -- Table structure for sys_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notice`;
-CREATE TABLE `sys_notice` (
+CREATE TABLE `sys_notice`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `title` varchar(255) DEFAULT NULL COMMENT '标题',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
   `type` int(11) DEFAULT NULL COMMENT '类型',
-  `content` text COMMENT '内容',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
+  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
+  `createtime` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `creater` int(11) DEFAULT NULL COMMENT '创建人',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='通知表';
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '通知表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES ('6', '世界', '10', '欢迎使用forceid管理系统', '2017-01-11 08:53:20', '1');
-INSERT INTO `sys_notice` VALUES ('8', '你好', null, '你好', '2017-05-10 19:28:57', '1');
+INSERT INTO `sys_notice` VALUES (6, '欢迎语', 10, '欢迎使用forceid身份管理系统！', '2017-01-11 08:53:20', 1);
 
 -- ----------------------------
 -- Table structure for sys_operation_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_operation_log`;
-CREATE TABLE `sys_operation_log` (
+CREATE TABLE `sys_operation_log`  (
   `id` int(65) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `logtype` varchar(255) DEFAULT NULL COMMENT '日志类型',
-  `logname` varchar(255) DEFAULT NULL COMMENT '日志名称',
+  `logtype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '日志类型',
+  `logname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '日志名称',
   `userid` int(65) DEFAULT NULL COMMENT '用户id',
-  `classname` varchar(255) DEFAULT NULL COMMENT '类名称',
-  `method` text COMMENT '方法名称',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
-  `succeed` varchar(255) DEFAULT NULL COMMENT '是否成功',
-  `message` text COMMENT '备注',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=550 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+  `classname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '类名称',
+  `method` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '方法名称',
+  `createtime` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `succeed` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '是否成功',
+  `message` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 707 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_operation_log
 -- ----------------------------
+INSERT INTO `sys_operation_log` VALUES (608, '业务日志', '清空业务日志', 1, 'com.bodhiye.forceid.modular.system.controller.LogController', 'delLog', '2018-07-01 15:09:25', '成功', '主键id=null');
+INSERT INTO `sys_operation_log` VALUES (609, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:10:59', '成功', '部门简称=珞珈之戍;;;字段名称:部门简称,旧值:总公司,新值:珞珈之戍;;;字段名称:部门全称,旧值:总公司,新值:珞珈之戍部门;;;字段名称:备注,旧值:,新值:武汉大学国家网络安全学院');
+INSERT INTO `sys_operation_log` VALUES (610, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:11:41', '成功', '部门简称=开发部;;;字段名称:部门全称,旧值:开发部,新值:开发部们;;;字段名称:备注,旧值:,新值:前后台开发部门');
+INSERT INTO `sys_operation_log` VALUES (611, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:11:52', '成功', '部门简称=开发部;;;');
+INSERT INTO `sys_operation_log` VALUES (612, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:13:07', '成功', '部门简称=身份管理;;;字段名称:部门简称,旧值:开发部,新值:身份管理;;;字段名称:部门全称,旧值:开发部们,新值:身份管理部门;;;字段名称:备注,旧值:前后台开发部门,新值:负责ForceID身份管理系统的开发');
+INSERT INTO `sys_operation_log` VALUES (613, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:13:47', '成功', '部门简称=珞珈之戍;;;字段名称:备注,旧值:武汉大学国家网络安全学院,新值:武汉大学国家网络安全学院珞珈之戍研发小组');
+INSERT INTO `sys_operation_log` VALUES (614, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:14:49', '成功', '部门简称=大数据平台;;;字段名称:部门简称,旧值:运营部,新值:大数据平台;;;字段名称:部门全称,旧值:运营部,新值:大部署部门;;;字段名称:备注,旧值:,新值:负责ForceID大数据平台的研发');
+INSERT INTO `sys_operation_log` VALUES (615, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:14:56', '成功', '部门简称=身份管理;;;字段名称:备注,旧值:负责ForceID身份管理系统的开发,新值:负责ForceID身份管理系统的研发');
+INSERT INTO `sys_operation_log` VALUES (616, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:18:09', '成功', '部门简称=认证平台;;;字段名称:部门简称,旧值:战略部,新值:认证平台;;;字段名称:部门全称,旧值:战略部,新值:身份认证部门;;;字段名称:备注,旧值:,新值:负责ForceID身份认证平台的研发');
+INSERT INTO `sys_operation_log` VALUES (617, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:18:18', '成功', '部门简称=大数据平台;;;字段名称:部门全称,旧值:大部署部门,新值:大数据部门');
+INSERT INTO `sys_operation_log` VALUES (618, '业务日志', '添加部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'add', '2018-07-01 15:19:45', '成功', '部门简称=战略部');
+INSERT INTO `sys_operation_log` VALUES (619, '业务日志', '添加部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'add', '2018-07-01 15:20:34', '成功', '部门简称=测试部');
+INSERT INTO `sys_operation_log` VALUES (620, '业务日志', '添加角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'add', '2018-07-01 15:21:32', '成功', '角色名称=管理员');
+INSERT INTO `sys_operation_log` VALUES (621, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:22:03', '成功', '角色名称=临时;;;字段名称:角色排序,旧值:2,新值:5;;;字段名称:部门名称,旧值:大数据部门,新值:测试部门');
+INSERT INTO `sys_operation_log` VALUES (622, '业务日志', '添加部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'add', '2018-07-01 15:22:54', '成功', '部门简称=体验服');
+INSERT INTO `sys_operation_log` VALUES (623, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:23:03', '成功', '部门简称=战略部;;;字段名称:部门排序,旧值:6,新值:1');
+INSERT INTO `sys_operation_log` VALUES (624, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:23:23', '成功', '部门简称=体验服;;;字段名称:部门排序,旧值:7,新值:6');
+INSERT INTO `sys_operation_log` VALUES (625, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:23:48', '成功', '角色名称=临时;;;字段名称:角色的父级,旧值:超级管理员,新值:管理员;;;字段名称:部门名称,旧值:测试部门,新值:体验部门');
+INSERT INTO `sys_operation_log` VALUES (626, '业务日志', '添加角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'add', '2018-07-01 15:24:56', '成功', '角色名称=普通员工');
+INSERT INTO `sys_operation_log` VALUES (627, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:25:03', '成功', '角色名称=超级管理员;;;');
+INSERT INTO `sys_operation_log` VALUES (628, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:25:11', '成功', '角色名称=超级管理员;;;字段名称:角色的父级,旧值:--,新值:超级管理员');
+INSERT INTO `sys_operation_log` VALUES (629, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:25:37', '成功', '角色名称=超级管理员;;;字段名称:角色的父级,旧值:超级管理员,新值:--');
+INSERT INTO `sys_operation_log` VALUES (630, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:25:49', '成功', '角色名称=管理员;;;');
+INSERT INTO `sys_operation_log` VALUES (631, '业务日志', '删除角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'remove', '2018-07-01 15:26:13', '成功', '角色名称=');
+INSERT INTO `sys_operation_log` VALUES (632, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:26:22', '成功', '角色名称=员工;;;字段名称:角色名称,旧值:普通员工,新值:员工');
+INSERT INTO `sys_operation_log` VALUES (633, '业务日志', '修改角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'edit', '2018-07-01 15:26:45', '成功', '角色名称=超级管理员;;;');
+INSERT INTO `sys_operation_log` VALUES (634, '业务日志', '添加角色', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'add', '2018-07-01 15:27:17', '成功', '角色名称=临时');
+INSERT INTO `sys_operation_log` VALUES (635, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 15:27:26', '成功', '角色名称=超级管理员,资源名称=系统管理,菜单管理,添加菜单,修改菜单,删除菜单,菜单编辑跳转,菜单列表,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,通知管理,添加通知,修改通知,删除通知,代码生成,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,请求管理,请求申请,请求审批,审计管理,业务日志,清空日志,日志列表,日志详情,登录日志,清空登录日志,登录日志列表');
+INSERT INTO `sys_operation_log` VALUES (636, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 15:28:17', '成功', '角色名称=管理员,资源名称=系统管理,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,通知管理,添加通知,修改通知,删除通知,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,请求管理,请求申请,请求审批,审计管理,业务日志,清空日志,日志列表,日志详情,登录日志,清空登录日志,登录日志列表');
+INSERT INTO `sys_operation_log` VALUES (637, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 15:30:25', '成功', '角色名称=管理员,资源名称=系统管理,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,通知管理,添加通知,修改通知,删除通知,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,请求管理,请求申请,请求审批,审计管理,业务日志,日志列表,日志详情,登录日志,登录日志列表');
+INSERT INTO `sys_operation_log` VALUES (638, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 15:32:32', '成功', '角色名称=员工,资源名称=用户管理,修改用户,重置密码,用户列表,监控管理,部门管理,部门列表,部门详情,请求管理,请求申请,审计管理,业务日志,日志列表,日志详情,登录日志,登录日志列表');
+INSERT INTO `sys_operation_log` VALUES (639, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 15:33:00', '成功', '角色名称=临时,资源名称=用户管理,用户列表,监控管理,部门管理,部门详情,审计管理,业务日志,日志列表,日志详情,登录日志,登录日志列表');
+INSERT INTO `sys_operation_log` VALUES (640, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:33:47', '成功', '账号=admin;;;字段名称:生日,旧值:2017-05-05,新值:1996-06-23;;;字段名称:电话,旧值:18200000000,新值:17671757008;;;字段名称:部门名称,旧值:身份认证部门,新值:身份管理部门');
+INSERT INTO `sys_operation_log` VALUES (641, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:34:37', '成功', '账号=chenjing;;;字段名称:账号,旧值:boss,新值:chenjing;;;字段名称:名字,旧值:老板,新值:陈晶;;;字段名称:生日,旧值:2017-12-04,新值:2018-07-01;;;字段名称:电子邮件,旧值:,新值:chenjing@whu.edu.cn;;;字段名称:电话,旧值:,新值:17671757008');
+INSERT INTO `sys_operation_log` VALUES (642, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:35:07', '成功', '账号=manager,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (643, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:35:21', '成功', '账号=chenjing;;;字段名称:部门名称,旧值:珞珈之戍部门,新值:战略部门');
+INSERT INTO `sys_operation_log` VALUES (644, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:36:17', '成功', '账号=liulei;;;字段名称:账号,旧值:manager,新值:liulei;;;字段名称:名字,旧值:经理,新值:刘磊;;;字段名称:生日,旧值:2017-12-04,新值:2018-07-01;;;字段名称:电子邮件,旧值:,新值:liulei@163.com;;;字段名称:电话,旧值:,新值:17671757008;;;字段名称:部门名称,旧值:珞珈之戍部门,新值:战略部门');
+INSERT INTO `sys_operation_log` VALUES (645, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:37:24', '成功', '账号=wangchiheng');
+INSERT INTO `sys_operation_log` VALUES (646, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:37:32', '成功', '账号=wangchiheng,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (647, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:37:39', '成功', '账号=chenjing,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (648, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:38:29', '成功', '账号=chenshuo');
+INSERT INTO `sys_operation_log` VALUES (649, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:38:41', '成功', '账号=admin;;;字段名称:名字,旧值:叶琼州,新值:珞珈之戍');
+INSERT INTO `sys_operation_log` VALUES (650, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:38:51', '成功', '账号=admin;;;字段名称:电子邮件,旧值:yeqiongzhou@whu.edu.cn,新值:luojiazhishu@whu.edu.cn');
+INSERT INTO `sys_operation_log` VALUES (651, '业务日志', '修改管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'edit', '2018-07-01 15:39:32', '成功', '账号=bodhiye;;;字段名称:账号,旧值:chenshuo,新值:bodhiye;;;字段名称:名字,旧值:陈说,新值:叶琼州;;;字段名称:电子邮件,旧值:chenshuo@whu.edu.cn,新值:yeqiongzhou@whu.edu.cn;;;字段名称:部门名称,旧值:大数据部门,新值:身份管理部门');
+INSERT INTO `sys_operation_log` VALUES (652, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:39:48', '成功', '账号=bodhiye,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (653, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:40:32', '成功', '账号=chenshuo');
+INSERT INTO `sys_operation_log` VALUES (654, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:40:39', '成功', '账号=chenshuo,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (655, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:41:38', '成功', '账号=ligaoshen');
+INSERT INTO `sys_operation_log` VALUES (656, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:41:44', '成功', '账号=ligaoshen,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (657, '业务日志', '添加部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'add', '2018-07-01 15:42:59', '成功', '部门简称=证书部');
+INSERT INTO `sys_operation_log` VALUES (658, '业务日志', '添加部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'add', '2018-07-01 15:43:58', '成功', '部门简称=公众号');
+INSERT INTO `sys_operation_log` VALUES (659, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:44:11', '成功', '部门简称=测试部;;;字段名称:部门排序,旧值:5,新值:7');
+INSERT INTO `sys_operation_log` VALUES (660, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:44:19', '成功', '部门简称=体验服;;;字段名称:部门排序,旧值:6,新值:8');
+INSERT INTO `sys_operation_log` VALUES (661, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:45:09', '成功', '账号=yangzikang');
+INSERT INTO `sys_operation_log` VALUES (662, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:45:15', '成功', '账号=yangzikang,角色名称集合=员工');
+INSERT INTO `sys_operation_log` VALUES (663, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:45:55', '成功', '账号=duanrui');
+INSERT INTO `sys_operation_log` VALUES (664, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:46:03', '成功', '账号=duanrui,角色名称集合=临时');
+INSERT INTO `sys_operation_log` VALUES (665, '业务日志', '添加部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'add', '2018-07-01 15:47:43', '成功', '部门简称=区块链');
+INSERT INTO `sys_operation_log` VALUES (666, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:47:51', '成功', '部门简称=证书部;;;字段名称:部门排序,旧值:5,新值:6');
+INSERT INTO `sys_operation_log` VALUES (667, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:49:04', '成功', '部门简称=公众号;;;字段名称:部门排序,旧值:6,新值:7');
+INSERT INTO `sys_operation_log` VALUES (668, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:49:09', '成功', '部门简称=公众号;;;字段名称:部门排序,旧值:7,新值:8');
+INSERT INTO `sys_operation_log` VALUES (669, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:49:16', '成功', '部门简称=公众号;;;字段名称:部门排序,旧值:8,新值:9');
+INSERT INTO `sys_operation_log` VALUES (670, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:49:24', '成功', '部门简称=体验服;;;字段名称:部门排序,旧值:8,新值:9');
+INSERT INTO `sys_operation_log` VALUES (671, '业务日志', '修改部门', 1, 'com.bodhiye.forceid.modular.system.controller.DeptController', 'update', '2018-07-01 15:49:29', '成功', '部门简称=公众号;;;字段名称:部门排序,旧值:9,新值:8');
+INSERT INTO `sys_operation_log` VALUES (672, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:50:20', '成功', '账号=chenxin');
+INSERT INTO `sys_operation_log` VALUES (673, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:50:26', '成功', '账号=chenxin,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (674, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:51:13', '成功', '账号=zhanzeyi');
+INSERT INTO `sys_operation_log` VALUES (675, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:51:25', '成功', '账号=zhanzeyi,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (676, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:52:14', '成功', '账号=weixiaojun');
+INSERT INTO `sys_operation_log` VALUES (677, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:52:19', '成功', '账号=weixiaojun,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (678, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:53:03', '成功', '账号=jiameng');
+INSERT INTO `sys_operation_log` VALUES (679, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:53:09', '成功', '账号=jiameng,角色名称集合=管理员');
+INSERT INTO `sys_operation_log` VALUES (680, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:53:47', '成功', '账号=wangze');
+INSERT INTO `sys_operation_log` VALUES (681, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:53:56', '成功', '账号=wangze,角色名称集合=员工');
+INSERT INTO `sys_operation_log` VALUES (682, '业务日志', '添加管理员', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'add', '2018-07-01 15:54:37', '成功', '账号=wangxinxin');
+INSERT INTO `sys_operation_log` VALUES (683, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:54:51', '成功', '账号=wangxinxin,角色名称集合=临时');
+INSERT INTO `sys_operation_log` VALUES (684, '业务日志', '分配角色', 1, 'com.bodhiye.forceid.modular.system.controller.UserMgrController', 'setRole', '2018-07-01 15:54:59', '成功', '账号=wangxinxin,角色名称集合=员工');
+INSERT INTO `sys_operation_log` VALUES (685, '业务日志', '修改通知', 1, 'com.bodhiye.forceid.modular.system.controller.NoticeController', 'update', '2018-07-01 15:57:39', '成功', '标题=欢迎语;;;字段名称:内容,旧值:欢迎使用forceid身份管理系统！<p><br></p>,新值:欢迎使用forceid身份管理系统！');
+INSERT INTO `sys_operation_log` VALUES (686, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 15:59:01', '成功', '菜单名称=监控管理;;;字段名称:菜单排序号,旧值:7,新值:6');
+INSERT INTO `sys_operation_log` VALUES (687, '业务日志', '菜单新增', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'add', '2018-07-01 16:20:25', '成功', '菜单名称=应用管理');
+INSERT INTO `sys_operation_log` VALUES (688, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 16:20:47', '成功', '角色名称=超级管理员,资源名称=系统管理,菜单管理,添加菜单,修改菜单,删除菜单,菜单编辑跳转,菜单列表,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,通知管理,添加通知,修改通知,删除通知,代码生成,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,请求管理,请求申请,请求审批,审计管理,业务日志,清空日志,日志列表,日志详情,登录日志,清空登录日志,登录日志列表,应用管理');
+INSERT INTO `sys_operation_log` VALUES (689, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 16:21:09', '成功', '角色名称=管理员,资源名称=系统管理,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,通知管理,添加通知,修改通知,删除通知,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,请求管理,请求申请,请求审批,审计管理,业务日志,日志列表,日志详情,登录日志,登录日志列表,应用管理');
+INSERT INTO `sys_operation_log` VALUES (690, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 16:21:19', '成功', '角色名称=员工,资源名称=用户管理,修改用户,重置密码,用户列表,监控管理,部门管理,部门列表,部门详情,请求管理,请求申请,审计管理,业务日志,日志列表,日志详情,登录日志,登录日志列表,应用管理');
+INSERT INTO `sys_operation_log` VALUES (691, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:22:24', '成功', '菜单名称=监控管理;;;字段名称:菜单图标,旧值:fa-bell,新值:fa-shield');
+INSERT INTO `sys_operation_log` VALUES (692, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:24:37', '成功', '菜单名称=请求管理;;;字段名称:菜单排序号,旧值:4,新值:5');
+INSERT INTO `sys_operation_log` VALUES (693, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:24:58', '成功', '菜单名称=审计管理;;;字段名称:菜单排序号,旧值:5,新值:6');
+INSERT INTO `sys_operation_log` VALUES (694, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:25:09', '成功', '菜单名称=监控管理;;;字段名称:菜单排序号,旧值:6,新值:7');
+INSERT INTO `sys_operation_log` VALUES (695, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:25:21', '成功', '菜单名称=系统管理;;;字段名称:菜单排序号,旧值:7,新值:8');
+INSERT INTO `sys_operation_log` VALUES (696, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:26:31', '成功', '菜单名称=应用管理;;;字段名称:菜单编号,旧值:application,新值:application_manager;;;字段名称:url地址,旧值:/application,新值:#');
+INSERT INTO `sys_operation_log` VALUES (697, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:27:27', '成功', '菜单名称=应用管理;;;字段名称:菜单编号,旧值:application_manager,新值:application');
+INSERT INTO `sys_operation_log` VALUES (698, '业务日志', '修改菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'edit', '2018-07-01 16:28:07', '成功', '菜单名称=应用管理;;;字段名称:url地址,旧值:#,新值:/application');
+INSERT INTO `sys_operation_log` VALUES (699, '业务日志', '菜单新增', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'add', '2018-07-01 16:31:54', '成功', '菜单名称=添加应用');
+INSERT INTO `sys_operation_log` VALUES (700, '业务日志', '配置权限', 1, 'com.bodhiye.forceid.modular.system.controller.RoleController', 'setAuthority', '2018-07-01 16:33:39', '成功', '角色名称=超级管理员,资源名称=系统管理,菜单管理,添加菜单,修改菜单,删除菜单,菜单编辑跳转,菜单列表,字典管理,添加字典,修改字典,删除字典,修改菜单跳转,字典列表,字典详情,通知管理,添加通知,修改通知,删除通知,代码生成,用户管理,添加用户,修改用户,删除用户,重置密码,冻结用户,解除冻结用户,分配角色,分配角色跳转,编辑用户跳转,用户列表,角色管理,添加角色,修改角色,删除角色,配置权限,修改角色跳转,角色分配跳转,角色列表,监控管理,部门管理,添加部门,修改部门,删除部门,修改部门跳转,部门列表,部门详情,请求管理,请求申请,请求审批,审计管理,业务日志,清空日志,日志列表,日志详情,登录日志,清空登录日志,登录日志列表,应用管理,添加应用');
+INSERT INTO `sys_operation_log` VALUES (701, '业务日志', '删除菜单', 1, 'com.bodhiye.forceid.modular.system.controller.MenuController', 'remove', '2018-07-01 16:35:57', '成功', '菜单id=173');
+INSERT INTO `sys_operation_log` VALUES (702, '异常日志', '', 1, NULL, NULL, '2018-07-01 16:50:28', '失败', 'org.springframework.jdbc.UncategorizedSQLException: \r\n### Error updating database.  Cause: java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\r\n### The error may involve com.bodhiye.forceid.modular.system.dao.ExpenseMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO sys_expense   ( money,  `desc`,    `state`,  userid,  processId )  VALUES   ( ?,  ?,    ?,  ?,  ? )\r\n### Cause: java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\n; uncategorized SQLException for SQL []; SQL state [HY000]; error code [1366]; Incorrect decimal value: \'你好啊\' for column \'money\' at row 1; nested exception is java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:90)\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:82)\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:82)\r\n	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)\r\n	at org.mybatis.spring.SqlSessionTemplateTSqlSessionInterceptor.invoke(SqlSessionTemplate.java:446)\r\n	at com.sun.proxy.TProxy99.insert(Unknown Source)\r\n	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:278)\r\n	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:57)\r\n	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)\r\n	at com.sun.proxy.TProxy112.insert(Unknown Source)\r\n	at com.baomidou.mybatisplus.service.impl.ServiceImpl.insert(ServiceImpl.java:98)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImpl.add(ExpenseServiceImpl.java:71)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTFastClassBySpringCGLIBTT4757848f.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at com.alibaba.druid.support.spring.stat.DruidStatInterceptor.invoke(DruidStatInterceptor.java:72)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptorT1.proceedWithInvocation(TransactionInterceptor.java:99)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTEnhancerBySpringCGLIBTTefbc11ed.add(<generated>)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ExpenseController.add(ExpenseController.java:83)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ExpenseControllerTTFastClassBySpringCGLIBTTd2c8f625.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85)\r\n	at com.bodhiye.forceid.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618)\r\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ExpenseControllerTTEnhancerBySpringCGLIBTTd8e8c98d.add(<generated>)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133)\r\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)\r\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)\r\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)\r\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)\r\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)\r\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\r\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\r\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\r\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\r\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.bodhiye.forceid.core.xss.XssFilter.doFilter(XssFilter.java:31)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\r\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\r\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478)\r\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\r\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\r\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\r\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\r\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\r\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\r\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:868)\r\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\r\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\r\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\r\n	at java.lang.Thread.run(Thread.java:748)\r\nCaused by: java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\r\n	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:957)\r\n	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3878)\r\n	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3814)\r\n	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2478)\r\n	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2625)\r\n	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2551)\r\n	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)\r\n	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1192)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051)\r\n	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049)\r\n	at com.alibaba.druid.wall.WallFilter.preparedStatement_execute(WallFilter.java:619)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049)\r\n	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049)\r\n	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167)\r\n	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)\r\n	at com.sun.proxy.TProxy132.execute(Unknown Source)\r\n	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:46)\r\n	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy130.update(Unknown Source)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy130.update(Unknown Source)\r\n	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)\r\n	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)\r\n	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)\r\n	at com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor.intercept(OptimisticLockerInterceptor.java:72)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)\r\n	at com.sun.proxy.TProxy129.update(Unknown Source)\r\n	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)\r\n	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:185)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.mybatis.spring.SqlSessionTemplateTSqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)\r\n	... 112 more\r\n');
+INSERT INTO `sys_operation_log` VALUES (703, '异常日志', '', 1, NULL, NULL, '2018-07-01 16:50:34', '失败', 'org.springframework.jdbc.UncategorizedSQLException: \r\n### Error updating database.  Cause: java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\r\n### The error may involve com.bodhiye.forceid.modular.system.dao.ExpenseMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO sys_expense   ( money,  `desc`,    `state`,  userid,  processId )  VALUES   ( ?,  ?,    ?,  ?,  ? )\r\n### Cause: java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\n; uncategorized SQLException for SQL []; SQL state [HY000]; error code [1366]; Incorrect decimal value: \'你好啊\' for column \'money\' at row 1; nested exception is java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:90)\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:82)\r\n	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:82)\r\n	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)\r\n	at org.mybatis.spring.SqlSessionTemplateTSqlSessionInterceptor.invoke(SqlSessionTemplate.java:446)\r\n	at com.sun.proxy.TProxy99.insert(Unknown Source)\r\n	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:278)\r\n	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:57)\r\n	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59)\r\n	at com.sun.proxy.TProxy112.insert(Unknown Source)\r\n	at com.baomidou.mybatisplus.service.impl.ServiceImpl.insert(ServiceImpl.java:98)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImpl.add(ExpenseServiceImpl.java:71)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTFastClassBySpringCGLIBTT4757848f.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at com.alibaba.druid.support.spring.stat.DruidStatInterceptor.invoke(DruidStatInterceptor.java:72)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptorT1.proceedWithInvocation(TransactionInterceptor.java:99)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTEnhancerBySpringCGLIBTTefbc11ed.add(<generated>)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ExpenseController.add(ExpenseController.java:83)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ExpenseControllerTTFastClassBySpringCGLIBTTd2c8f625.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85)\r\n	at com.bodhiye.forceid.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618)\r\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ExpenseControllerTTEnhancerBySpringCGLIBTTd8e8c98d.add(<generated>)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133)\r\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)\r\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)\r\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)\r\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)\r\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)\r\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\r\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\r\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\r\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\r\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.bodhiye.forceid.core.xss.XssFilter.doFilter(XssFilter.java:31)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\r\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\r\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478)\r\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\r\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\r\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\r\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\r\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\r\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\r\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:868)\r\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\r\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\r\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\r\n	at java.lang.Thread.run(Thread.java:748)\r\nCaused by: java.sql.SQLException: Incorrect decimal value: \'你好啊\' for column \'money\' at row 1\r\n	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:957)\r\n	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3878)\r\n	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3814)\r\n	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2478)\r\n	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2625)\r\n	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2551)\r\n	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)\r\n	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1192)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051)\r\n	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049)\r\n	at com.alibaba.druid.wall.WallFilter.preparedStatement_execute(WallFilter.java:619)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049)\r\n	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440)\r\n	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049)\r\n	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167)\r\n	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)\r\n	at com.sun.proxy.TProxy132.execute(Unknown Source)\r\n	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:46)\r\n	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy130.update(Unknown Source)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)\r\n	at com.sun.proxy.TProxy130.update(Unknown Source)\r\n	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)\r\n	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)\r\n	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)\r\n	at com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor.intercept(OptimisticLockerInterceptor.java:72)\r\n	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)\r\n	at com.sun.proxy.TProxy129.update(Unknown Source)\r\n	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)\r\n	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:185)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.mybatis.spring.SqlSessionTemplateTSqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)\r\n	... 112 more\r\n');
+INSERT INTO `sys_operation_log` VALUES (704, '异常日志', '', 1, NULL, NULL, '2018-07-01 16:52:57', '失败', 'java.lang.NullPointerException\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImpl.pass(ExpenseServiceImpl.java:113)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTFastClassBySpringCGLIBTT4757848f.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at com.alibaba.druid.support.spring.stat.DruidStatInterceptor.invoke(DruidStatInterceptor.java:72)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptorT1.proceedWithInvocation(TransactionInterceptor.java:99)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTEnhancerBySpringCGLIBTTefbc11ed.pass(<generated>)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessController.pass(ProcessController.java:58)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessControllerTTFastClassBySpringCGLIBTTa4f9db7c.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85)\r\n	at com.bodhiye.forceid.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618)\r\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessControllerTTEnhancerBySpringCGLIBTTf88e07f2.pass(<generated>)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133)\r\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)\r\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)\r\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)\r\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)\r\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)\r\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\r\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\r\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\r\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\r\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.bodhiye.forceid.core.xss.XssFilter.doFilter(XssFilter.java:31)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\r\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\r\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478)\r\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\r\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\r\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\r\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\r\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\r\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\r\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:868)\r\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\r\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\r\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\r\n	at java.lang.Thread.run(Thread.java:748)\r\n');
+INSERT INTO `sys_operation_log` VALUES (705, '异常日志', '', 1, NULL, NULL, '2018-07-01 16:53:16', '失败', 'org.flowable.engine.common.api.FlowableObjectNotFoundException: Cannot find task with id 27507\r\n	at org.flowable.engine.impl.cmd.NeedsActiveTaskCmd.execute(NeedsActiveTaskCmd.java:51)\r\n	at org.flowable.engine.impl.interceptor.CommandInvokerT1.run(CommandInvoker.java:51)\r\n	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93)\r\n	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72)\r\n	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56)\r\n	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25)\r\n	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53)\r\n	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:72)\r\n	at org.flowable.spring.SpringTransactionInterceptorT1.doInTransaction(SpringTransactionInterceptor.java:49)\r\n	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)\r\n	at org.flowable.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46)\r\n	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30)\r\n	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56)\r\n	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51)\r\n	at org.flowable.engine.impl.TaskServiceImpl.complete(TaskServiceImpl.java:215)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImpl.pass(ExpenseServiceImpl.java:98)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTFastClassBySpringCGLIBTT4757848f.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at com.alibaba.druid.support.spring.stat.DruidStatInterceptor.invoke(DruidStatInterceptor.java:72)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptorT1.proceedWithInvocation(TransactionInterceptor.java:99)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTEnhancerBySpringCGLIBTTefbc11ed.pass(<generated>)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessController.pass(ProcessController.java:58)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessControllerTTFastClassBySpringCGLIBTTa4f9db7c.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85)\r\n	at com.bodhiye.forceid.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618)\r\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessControllerTTEnhancerBySpringCGLIBTTf88e07f2.pass(<generated>)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133)\r\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)\r\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)\r\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)\r\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)\r\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)\r\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\r\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\r\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\r\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\r\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.bodhiye.forceid.core.xss.XssFilter.doFilter(XssFilter.java:31)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\r\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\r\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478)\r\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\r\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\r\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\r\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\r\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\r\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\r\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:868)\r\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\r\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\r\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\r\n	at java.lang.Thread.run(Thread.java:748)\r\n');
+INSERT INTO `sys_operation_log` VALUES (706, '异常日志', '', 1, NULL, NULL, '2018-07-01 16:53:18', '失败', 'java.lang.NullPointerException\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImpl.pass(ExpenseServiceImpl.java:113)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTFastClassBySpringCGLIBTT4757848f.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at com.alibaba.druid.support.spring.stat.DruidStatInterceptor.invoke(DruidStatInterceptor.java:72)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptorT1.proceedWithInvocation(TransactionInterceptor.java:99)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.service.impl.ExpenseServiceImplTTEnhancerBySpringCGLIBTTefbc11ed.pass(<generated>)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessController.pass(ProcessController.java:58)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessControllerTTFastClassBySpringCGLIBTTa4f9db7c.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\r\n	at org.springframework.aop.framework.CglibAopProxyTCglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:738)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)\r\n	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85)\r\n	at com.bodhiye.forceid.core.intercept.SessionHolderInterceptor.sessionKit(SessionHolderInterceptor.java:29)\r\n	at sun.reflect.GeneratedMethodAccessor117.invoke(Unknown Source)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629)\r\n	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618)\r\n	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\r\n	at org.springframework.aop.framework.CglibAopProxyTDynamicAdvisedInterceptor.intercept(CglibAopProxy.java:673)\r\n	at com.bodhiye.forceid.modular.flowable.controller.ProcessControllerTTEnhancerBySpringCGLIBTTf88e07f2.pass(<generated>)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)\r\n	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:133)\r\n	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)\r\n	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)\r\n	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)\r\n	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)\r\n	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)\r\n	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)\r\n	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)\r\n	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)\r\n	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)\r\n	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilterT1.call(AbstractShiroFilter.java:365)\r\n	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)\r\n	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)\r\n	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)\r\n	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)\r\n	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.bodhiye.forceid.core.xss.XssFilter.doFilter(XssFilter.java:31)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:108)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)\r\n	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)\r\n	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\r\n	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\r\n	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)\r\n	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\r\n	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478)\r\n	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)\r\n	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)\r\n	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)\r\n	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)\r\n	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803)\r\n	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)\r\n	at org.apache.coyote.AbstractProtocolTConnectionHandler.process(AbstractProtocol.java:868)\r\n	at org.apache.tomcat.util.net.NioEndpointTSocketProcessor.doRun(NioEndpoint.java:1459)\r\n	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\r\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n	at java.util.concurrent.ThreadPoolExecutorTWorker.run(ThreadPoolExecutor.java:624)\r\n	at org.apache.tomcat.util.threads.TaskThreadTWrappingRunnable.run(TaskThread.java:61)\r\n	at java.lang.Thread.run(Thread.java:748)\r\n');
 
 -- ----------------------------
 -- Table structure for sys_relation
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_relation`;
-CREATE TABLE `sys_relation` (
+CREATE TABLE `sys_relation`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `menuid` bigint(11) DEFAULT NULL COMMENT '菜单id',
   `roleid` int(11) DEFAULT NULL COMMENT '角色id',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3737 DEFAULT CHARSET=utf8 COMMENT='角色和菜单关联表';
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4160 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_relation
 -- ----------------------------
-INSERT INTO `sys_relation` VALUES ('3377', '105', '5');
-INSERT INTO `sys_relation` VALUES ('3378', '106', '5');
-INSERT INTO `sys_relation` VALUES ('3379', '107', '5');
-INSERT INTO `sys_relation` VALUES ('3380', '108', '5');
-INSERT INTO `sys_relation` VALUES ('3381', '109', '5');
-INSERT INTO `sys_relation` VALUES ('3382', '110', '5');
-INSERT INTO `sys_relation` VALUES ('3383', '111', '5');
-INSERT INTO `sys_relation` VALUES ('3384', '112', '5');
-INSERT INTO `sys_relation` VALUES ('3385', '113', '5');
-INSERT INTO `sys_relation` VALUES ('3386', '114', '5');
-INSERT INTO `sys_relation` VALUES ('3387', '115', '5');
-INSERT INTO `sys_relation` VALUES ('3388', '116', '5');
-INSERT INTO `sys_relation` VALUES ('3389', '117', '5');
-INSERT INTO `sys_relation` VALUES ('3390', '118', '5');
-INSERT INTO `sys_relation` VALUES ('3391', '119', '5');
-INSERT INTO `sys_relation` VALUES ('3392', '120', '5');
-INSERT INTO `sys_relation` VALUES ('3393', '121', '5');
-INSERT INTO `sys_relation` VALUES ('3394', '122', '5');
-INSERT INTO `sys_relation` VALUES ('3395', '150', '5');
-INSERT INTO `sys_relation` VALUES ('3396', '151', '5');
-INSERT INTO `sys_relation` VALUES ('3679', '105', '1');
-INSERT INTO `sys_relation` VALUES ('3680', '106', '1');
-INSERT INTO `sys_relation` VALUES ('3681', '107', '1');
-INSERT INTO `sys_relation` VALUES ('3682', '108', '1');
-INSERT INTO `sys_relation` VALUES ('3683', '109', '1');
-INSERT INTO `sys_relation` VALUES ('3684', '110', '1');
-INSERT INTO `sys_relation` VALUES ('3685', '111', '1');
-INSERT INTO `sys_relation` VALUES ('3686', '112', '1');
-INSERT INTO `sys_relation` VALUES ('3687', '113', '1');
-INSERT INTO `sys_relation` VALUES ('3688', '165', '1');
-INSERT INTO `sys_relation` VALUES ('3689', '166', '1');
-INSERT INTO `sys_relation` VALUES ('3690', '167', '1');
-INSERT INTO `sys_relation` VALUES ('3691', '114', '1');
-INSERT INTO `sys_relation` VALUES ('3692', '115', '1');
-INSERT INTO `sys_relation` VALUES ('3693', '116', '1');
-INSERT INTO `sys_relation` VALUES ('3694', '117', '1');
-INSERT INTO `sys_relation` VALUES ('3695', '118', '1');
-INSERT INTO `sys_relation` VALUES ('3696', '162', '1');
-INSERT INTO `sys_relation` VALUES ('3697', '163', '1');
-INSERT INTO `sys_relation` VALUES ('3698', '164', '1');
-INSERT INTO `sys_relation` VALUES ('3699', '119', '1');
-INSERT INTO `sys_relation` VALUES ('3700', '120', '1');
-INSERT INTO `sys_relation` VALUES ('3701', '121', '1');
-INSERT INTO `sys_relation` VALUES ('3702', '122', '1');
-INSERT INTO `sys_relation` VALUES ('3703', '150', '1');
-INSERT INTO `sys_relation` VALUES ('3704', '151', '1');
-INSERT INTO `sys_relation` VALUES ('3705', '128', '1');
-INSERT INTO `sys_relation` VALUES ('3706', '134', '1');
-INSERT INTO `sys_relation` VALUES ('3707', '158', '1');
-INSERT INTO `sys_relation` VALUES ('3708', '159', '1');
-INSERT INTO `sys_relation` VALUES ('3709', '130', '1');
-INSERT INTO `sys_relation` VALUES ('3710', '131', '1');
-INSERT INTO `sys_relation` VALUES ('3711', '135', '1');
-INSERT INTO `sys_relation` VALUES ('3712', '136', '1');
-INSERT INTO `sys_relation` VALUES ('3713', '137', '1');
-INSERT INTO `sys_relation` VALUES ('3714', '152', '1');
-INSERT INTO `sys_relation` VALUES ('3715', '153', '1');
-INSERT INTO `sys_relation` VALUES ('3716', '154', '1');
-INSERT INTO `sys_relation` VALUES ('3717', '132', '1');
-INSERT INTO `sys_relation` VALUES ('3718', '138', '1');
-INSERT INTO `sys_relation` VALUES ('3719', '139', '1');
-INSERT INTO `sys_relation` VALUES ('3720', '140', '1');
-INSERT INTO `sys_relation` VALUES ('3721', '155', '1');
-INSERT INTO `sys_relation` VALUES ('3722', '156', '1');
-INSERT INTO `sys_relation` VALUES ('3723', '157', '1');
-INSERT INTO `sys_relation` VALUES ('3724', '133', '1');
-INSERT INTO `sys_relation` VALUES ('3725', '160', '1');
-INSERT INTO `sys_relation` VALUES ('3726', '161', '1');
-INSERT INTO `sys_relation` VALUES ('3727', '141', '1');
-INSERT INTO `sys_relation` VALUES ('3728', '142', '1');
-INSERT INTO `sys_relation` VALUES ('3729', '143', '1');
-INSERT INTO `sys_relation` VALUES ('3730', '144', '1');
-INSERT INTO `sys_relation` VALUES ('3731', '148', '1');
-INSERT INTO `sys_relation` VALUES ('3732', '145', '1');
-INSERT INTO `sys_relation` VALUES ('3733', '149', '1');
-INSERT INTO `sys_relation` VALUES ('3734', '168', '1');
-INSERT INTO `sys_relation` VALUES ('3735', '169', '1');
-INSERT INTO `sys_relation` VALUES ('3736', '170', '1');
+INSERT INTO `sys_relation` VALUES (3967, 106, 8);
+INSERT INTO `sys_relation` VALUES (3968, 167, 8);
+INSERT INTO `sys_relation` VALUES (3969, 130, 8);
+INSERT INTO `sys_relation` VALUES (3970, 131, 8);
+INSERT INTO `sys_relation` VALUES (3971, 154, 8);
+INSERT INTO `sys_relation` VALUES (3972, 171, 8);
+INSERT INTO `sys_relation` VALUES (3973, 128, 8);
+INSERT INTO `sys_relation` VALUES (3974, 158, 8);
+INSERT INTO `sys_relation` VALUES (3975, 159, 8);
+INSERT INTO `sys_relation` VALUES (3976, 133, 8);
+INSERT INTO `sys_relation` VALUES (3977, 161, 8);
+INSERT INTO `sys_relation` VALUES (4036, 105, 6);
+INSERT INTO `sys_relation` VALUES (4037, 132, 6);
+INSERT INTO `sys_relation` VALUES (4038, 138, 6);
+INSERT INTO `sys_relation` VALUES (4039, 139, 6);
+INSERT INTO `sys_relation` VALUES (4040, 140, 6);
+INSERT INTO `sys_relation` VALUES (4041, 155, 6);
+INSERT INTO `sys_relation` VALUES (4042, 156, 6);
+INSERT INTO `sys_relation` VALUES (4043, 157, 6);
+INSERT INTO `sys_relation` VALUES (4044, 141, 6);
+INSERT INTO `sys_relation` VALUES (4045, 142, 6);
+INSERT INTO `sys_relation` VALUES (4046, 143, 6);
+INSERT INTO `sys_relation` VALUES (4047, 144, 6);
+INSERT INTO `sys_relation` VALUES (4048, 106, 6);
+INSERT INTO `sys_relation` VALUES (4049, 107, 6);
+INSERT INTO `sys_relation` VALUES (4050, 108, 6);
+INSERT INTO `sys_relation` VALUES (4051, 109, 6);
+INSERT INTO `sys_relation` VALUES (4052, 110, 6);
+INSERT INTO `sys_relation` VALUES (4053, 111, 6);
+INSERT INTO `sys_relation` VALUES (4054, 112, 6);
+INSERT INTO `sys_relation` VALUES (4055, 113, 6);
+INSERT INTO `sys_relation` VALUES (4056, 165, 6);
+INSERT INTO `sys_relation` VALUES (4057, 166, 6);
+INSERT INTO `sys_relation` VALUES (4058, 167, 6);
+INSERT INTO `sys_relation` VALUES (4059, 114, 6);
+INSERT INTO `sys_relation` VALUES (4060, 115, 6);
+INSERT INTO `sys_relation` VALUES (4061, 116, 6);
+INSERT INTO `sys_relation` VALUES (4062, 117, 6);
+INSERT INTO `sys_relation` VALUES (4063, 118, 6);
+INSERT INTO `sys_relation` VALUES (4064, 162, 6);
+INSERT INTO `sys_relation` VALUES (4065, 163, 6);
+INSERT INTO `sys_relation` VALUES (4066, 164, 6);
+INSERT INTO `sys_relation` VALUES (4067, 130, 6);
+INSERT INTO `sys_relation` VALUES (4068, 131, 6);
+INSERT INTO `sys_relation` VALUES (4069, 135, 6);
+INSERT INTO `sys_relation` VALUES (4070, 136, 6);
+INSERT INTO `sys_relation` VALUES (4071, 137, 6);
+INSERT INTO `sys_relation` VALUES (4072, 152, 6);
+INSERT INTO `sys_relation` VALUES (4073, 153, 6);
+INSERT INTO `sys_relation` VALUES (4074, 154, 6);
+INSERT INTO `sys_relation` VALUES (4075, 168, 6);
+INSERT INTO `sys_relation` VALUES (4076, 169, 6);
+INSERT INTO `sys_relation` VALUES (4077, 170, 6);
+INSERT INTO `sys_relation` VALUES (4078, 171, 6);
+INSERT INTO `sys_relation` VALUES (4079, 128, 6);
+INSERT INTO `sys_relation` VALUES (4080, 158, 6);
+INSERT INTO `sys_relation` VALUES (4081, 159, 6);
+INSERT INTO `sys_relation` VALUES (4082, 133, 6);
+INSERT INTO `sys_relation` VALUES (4083, 161, 6);
+INSERT INTO `sys_relation` VALUES (4084, 172, 6);
+INSERT INTO `sys_relation` VALUES (4085, 106, 7);
+INSERT INTO `sys_relation` VALUES (4086, 108, 7);
+INSERT INTO `sys_relation` VALUES (4087, 110, 7);
+INSERT INTO `sys_relation` VALUES (4088, 167, 7);
+INSERT INTO `sys_relation` VALUES (4089, 130, 7);
+INSERT INTO `sys_relation` VALUES (4090, 131, 7);
+INSERT INTO `sys_relation` VALUES (4091, 153, 7);
+INSERT INTO `sys_relation` VALUES (4092, 154, 7);
+INSERT INTO `sys_relation` VALUES (4093, 168, 7);
+INSERT INTO `sys_relation` VALUES (4094, 169, 7);
+INSERT INTO `sys_relation` VALUES (4095, 171, 7);
+INSERT INTO `sys_relation` VALUES (4096, 128, 7);
+INSERT INTO `sys_relation` VALUES (4097, 158, 7);
+INSERT INTO `sys_relation` VALUES (4098, 159, 7);
+INSERT INTO `sys_relation` VALUES (4099, 133, 7);
+INSERT INTO `sys_relation` VALUES (4100, 161, 7);
+INSERT INTO `sys_relation` VALUES (4101, 172, 7);
+INSERT INTO `sys_relation` VALUES (4102, 105, 1);
+INSERT INTO `sys_relation` VALUES (4103, 119, 1);
+INSERT INTO `sys_relation` VALUES (4104, 120, 1);
+INSERT INTO `sys_relation` VALUES (4105, 121, 1);
+INSERT INTO `sys_relation` VALUES (4106, 122, 1);
+INSERT INTO `sys_relation` VALUES (4107, 150, 1);
+INSERT INTO `sys_relation` VALUES (4108, 151, 1);
+INSERT INTO `sys_relation` VALUES (4109, 132, 1);
+INSERT INTO `sys_relation` VALUES (4110, 138, 1);
+INSERT INTO `sys_relation` VALUES (4111, 139, 1);
+INSERT INTO `sys_relation` VALUES (4112, 140, 1);
+INSERT INTO `sys_relation` VALUES (4113, 155, 1);
+INSERT INTO `sys_relation` VALUES (4114, 156, 1);
+INSERT INTO `sys_relation` VALUES (4115, 157, 1);
+INSERT INTO `sys_relation` VALUES (4116, 141, 1);
+INSERT INTO `sys_relation` VALUES (4117, 142, 1);
+INSERT INTO `sys_relation` VALUES (4118, 143, 1);
+INSERT INTO `sys_relation` VALUES (4119, 144, 1);
+INSERT INTO `sys_relation` VALUES (4120, 148, 1);
+INSERT INTO `sys_relation` VALUES (4121, 106, 1);
+INSERT INTO `sys_relation` VALUES (4122, 107, 1);
+INSERT INTO `sys_relation` VALUES (4123, 108, 1);
+INSERT INTO `sys_relation` VALUES (4124, 109, 1);
+INSERT INTO `sys_relation` VALUES (4125, 110, 1);
+INSERT INTO `sys_relation` VALUES (4126, 111, 1);
+INSERT INTO `sys_relation` VALUES (4127, 112, 1);
+INSERT INTO `sys_relation` VALUES (4128, 113, 1);
+INSERT INTO `sys_relation` VALUES (4129, 165, 1);
+INSERT INTO `sys_relation` VALUES (4130, 166, 1);
+INSERT INTO `sys_relation` VALUES (4131, 167, 1);
+INSERT INTO `sys_relation` VALUES (4132, 114, 1);
+INSERT INTO `sys_relation` VALUES (4133, 115, 1);
+INSERT INTO `sys_relation` VALUES (4134, 116, 1);
+INSERT INTO `sys_relation` VALUES (4135, 117, 1);
+INSERT INTO `sys_relation` VALUES (4136, 118, 1);
+INSERT INTO `sys_relation` VALUES (4137, 162, 1);
+INSERT INTO `sys_relation` VALUES (4138, 163, 1);
+INSERT INTO `sys_relation` VALUES (4139, 164, 1);
+INSERT INTO `sys_relation` VALUES (4140, 130, 1);
+INSERT INTO `sys_relation` VALUES (4141, 131, 1);
+INSERT INTO `sys_relation` VALUES (4142, 135, 1);
+INSERT INTO `sys_relation` VALUES (4143, 136, 1);
+INSERT INTO `sys_relation` VALUES (4144, 137, 1);
+INSERT INTO `sys_relation` VALUES (4145, 152, 1);
+INSERT INTO `sys_relation` VALUES (4146, 153, 1);
+INSERT INTO `sys_relation` VALUES (4147, 154, 1);
+INSERT INTO `sys_relation` VALUES (4148, 168, 1);
+INSERT INTO `sys_relation` VALUES (4149, 169, 1);
+INSERT INTO `sys_relation` VALUES (4150, 170, 1);
+INSERT INTO `sys_relation` VALUES (4151, 171, 1);
+INSERT INTO `sys_relation` VALUES (4152, 128, 1);
+INSERT INTO `sys_relation` VALUES (4153, 134, 1);
+INSERT INTO `sys_relation` VALUES (4154, 158, 1);
+INSERT INTO `sys_relation` VALUES (4155, 159, 1);
+INSERT INTO `sys_relation` VALUES (4156, 133, 1);
+INSERT INTO `sys_relation` VALUES (4157, 160, 1);
+INSERT INTO `sys_relation` VALUES (4158, 161, 1);
+INSERT INTO `sys_relation` VALUES (4159, 172, 1);
 
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role` (
+CREATE TABLE `sys_role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `num` int(11) DEFAULT NULL COMMENT '序号',
   `pid` int(11) DEFAULT NULL COMMENT '父角色id',
-  `name` varchar(255) DEFAULT NULL COMMENT '角色名称',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色名称',
   `deptid` int(11) DEFAULT NULL COMMENT '部门名称',
-  `tips` varchar(255) DEFAULT NULL COMMENT '提示',
+  `tips` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '提示',
   `version` int(11) DEFAULT NULL COMMENT '保留字段(暂时没用）',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色表';
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '1', '0', '超级管理员', '24', 'administrator', '1');
-INSERT INTO `sys_role` VALUES ('5', '2', '1', '临时', '26', 'temp', null);
+INSERT INTO `sys_role` VALUES (1, 1, 0, '超级管理员', 24, 'administrator', 1);
+INSERT INTO `sys_role` VALUES (6, 2, 1, '管理员', 28, 'admin', NULL);
+INSERT INTO `sys_role` VALUES (7, 3, 6, '员工', 29, 'staff', NULL);
+INSERT INTO `sys_role` VALUES (8, 4, 7, '临时', 30, 'temp', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE `sys_user` (
+CREATE TABLE `sys_user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
-  `account` varchar(45) DEFAULT NULL COMMENT '账号',
-  `password` varchar(45) DEFAULT NULL COMMENT '密码',
-  `salt` varchar(45) DEFAULT NULL COMMENT 'md5密码盐',
-  `name` varchar(45) DEFAULT NULL COMMENT '名字',
-  `birthday` datetime DEFAULT NULL COMMENT '生日',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '头像',
+  `account` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '账号',
+  `password` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '密码',
+  `salt` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'md5密码盐',
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '名字',
+  `birthday` datetime(0) DEFAULT NULL COMMENT '生日',
   `sex` int(11) DEFAULT NULL COMMENT '性别（1：男 2：女）',
-  `email` varchar(45) DEFAULT NULL COMMENT '电子邮件',
-  `phone` varchar(45) DEFAULT NULL COMMENT '电话',
-  `roleid` varchar(255) DEFAULT NULL COMMENT '角色id',
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '电子邮件',
+  `phone` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '电话',
+  `roleid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色id',
   `deptid` int(11) DEFAULT NULL COMMENT '部门id',
   `status` int(11) DEFAULT NULL COMMENT '状态(1：启用  2：冻结  3：删除）',
-  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
+  `createtime` datetime(0) DEFAULT NULL COMMENT '创建时间',
   `version` int(11) DEFAULT NULL COMMENT '保留字段',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='管理员表';
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'girl.gif', 'admin', 'ecfadcde9305f8891bcfe5a1e28c253e', '8pgby', '张三', '2017-05-05 00:00:00', '2', 'sn93@qq.com', '18200000000', '1', '27', '1', '2016-01-29 08:49:53', '25');
-INSERT INTO `sys_user` VALUES ('44', null, 'test', '45abb7879f6a8268f1ef600e6038ac73', 'ssts3', 'test', '2017-05-01 00:00:00', '1', 'abc@123.com', '', '5', '26', '3', '2017-05-16 20:33:37', null);
-INSERT INTO `sys_user` VALUES ('45', null, 'boss', '71887a5ad666a18f709e1d4e693d5a35', '1f7bf', '老板', '2017-12-04 00:00:00', '1', '', '', '1', '24', '1', '2017-12-04 22:24:02', null);
-INSERT INTO `sys_user` VALUES ('46', null, 'manager', 'b53cac62e7175637d4beb3b16b2f7915', 'j3cs9', '经理', '2017-12-04 00:00:00', '1', '', '', '1', '24', '1', '2017-12-04 22:24:24', null);
+INSERT INTO `sys_user` VALUES (1, 'dcf14ff4-c014-4466-96ab-1eed47dc5360.jpg', 'admin', 'ecfadcde9305f8891bcfe5a1e28c253e', '8pgby', '珞珈之戍', '1996-06-23 00:00:00', 1, 'luojiazhishu@whu.edu.cn', '17671757008', '1', 25, 1, '2016-01-29 08:49:53', 25);
+INSERT INTO `sys_user` VALUES (44, NULL, 'test', '45abb7879f6a8268f1ef600e6038ac73', 'ssts3', 'test', '2017-05-01 00:00:00', 1, 'abc@123.com', '', '5', 26, 3, '2017-05-16 20:33:37', NULL);
+INSERT INTO `sys_user` VALUES (45, NULL, 'chenjing', '71887a5ad666a18f709e1d4e693d5a35', '1f7bf', '陈晶', '2018-07-01 00:00:00', 1, 'chenjing@whu.edu.cn', '17671757008', '6', 28, 1, '2017-12-04 22:24:02', NULL);
+INSERT INTO `sys_user` VALUES (46, NULL, 'liulei', 'b53cac62e7175637d4beb3b16b2f7915', 'j3cs9', '刘磊', '2018-07-01 00:00:00', 1, 'liulei@163.com', '17671757008', '6', 28, 1, '2017-12-04 22:24:24', NULL);
+INSERT INTO `sys_user` VALUES (47, NULL, 'wangchiheng', 'f6a6ca562bbf26287265d14138cfceff', 'e669e', '王持恒', '2018-07-01 00:00:00', 1, 'wangchiheng@whu.edu.cn', '17671757008', '6', 28, 1, '2018-07-01 15:37:24', NULL);
+INSERT INTO `sys_user` VALUES (48, NULL, 'bodhiye', 'c43e4dc358f8b951723e880e2420fde7', 'it8dm', '叶琼州', '2018-07-01 00:00:00', 1, 'yeqiongzhou@whu.edu.cn', '17671757008', '6', 25, 1, '2018-07-01 15:38:29', NULL);
+INSERT INTO `sys_user` VALUES (49, NULL, 'chenshuo', 'f7d6f67968ef500c3f40c74c76cea210', 'guhqk', '陈说', '2018-07-01 00:00:00', 1, 'chenshuo@whu.edu.cn', '17671757008', '6', 26, 1, '2018-07-01 15:40:32', NULL);
+INSERT INTO `sys_user` VALUES (50, NULL, 'ligaoshen', 'c2a0924c29d31eb41a70c6f123ad6b7c', 'fy10p', '李高深', '2018-07-01 00:00:00', 1, 'ligaoshen@whu.edu.cn', '17671757008', '6', 26, 1, '2018-07-01 15:41:38', NULL);
+INSERT INTO `sys_user` VALUES (51, NULL, 'yangzikang', 'f888e6f957a1c9c6f088bf7a782e09d4', '0u3s0', '杨子康', '2018-07-01 00:00:00', 2, 'yangzikang@whu.edu.cn', '17671757008', '7', 32, 1, '2018-07-01 15:45:09', NULL);
+INSERT INTO `sys_user` VALUES (52, NULL, 'duanrui', '18e5f763994c7f9edef442b4a81cdbca', 'u50ce', '段瑞', '2018-07-01 00:00:00', 1, 'duanrui@whu.edu.cn', '17671757008', '8', 30, 1, '2018-07-01 15:45:55', NULL);
+INSERT INTO `sys_user` VALUES (53, NULL, 'chenxin', '65ac463dbef6da56a7bbf07e0d8b57ed', 'u7aho', '陈新', '2018-07-01 00:00:00', 1, 'chenxin@whu.edu.cn', '17671757008', '6', 33, 1, '2018-07-01 15:50:20', NULL);
+INSERT INTO `sys_user` VALUES (54, NULL, 'zhanzeyi', 'dd0aca54ea32e16b98e7fc93ee4d660d', 'pu5vw', '詹泽怡', NULL, 1, 'zhanzeyi@whu.edu.cn', '17671757008', '6', 26, 1, '2018-07-01 15:51:12', NULL);
+INSERT INTO `sys_user` VALUES (55, NULL, 'weixiaojun', '8275701eeb6e7d097f0f81afc7b79d19', 'ojm3x', '魏小军', NULL, 1, 'weixiaojun@whu.edu.cn', '17671757008', '6', 27, 1, '2018-07-01 15:52:14', NULL);
+INSERT INTO `sys_user` VALUES (56, NULL, 'jiameng', '417a8495b5e0667a4a229ac2b7887466', '4od1i', '加梦', NULL, 2, 'jiameng@whu.edu.cn', '17671757008', '6', 31, 1, '2018-07-01 15:53:03', NULL);
+INSERT INTO `sys_user` VALUES (57, NULL, 'wangze', 'eab6152e560223f20503d5617928be97', 'le6r7', '王泽', NULL, 1, 'wangze@whu.edu.cn', '17671757008', '7', 29, 1, '2018-07-01 15:53:47', NULL);
+INSERT INTO `sys_user` VALUES (58, NULL, 'wangxinxin', '4b0877761d6d8464f772fb1a1442af3c', '8ezlx', '汪欣欣', NULL, 2, 'wangxinxin@whu.edu.cn', '17671757008', '7', 30, 1, '2018-07-01 15:54:37', NULL);
+
+SET FOREIGN_KEY_CHECKS = 1;
